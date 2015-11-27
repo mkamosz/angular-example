@@ -1,0 +1,27 @@
+@import "config";
+
+html, body{
+  height:100%;
+  margin:0;
+  padding:0;
+}
+
+body{
+  .defaultFont;
+  background: @color-white;
+}
+
+ul,ol{
+  list-style: none;
+  margin:0;
+}
+
+a{
+  color:@color-blue-dark;
+  text-decoration: none;
+  .transition(.2s, color);
+  &:hover{
+    color:@color-blue;
+    text-decoration: none;
+  }
+}

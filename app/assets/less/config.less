@@ -1,0 +1,44 @@
+@color-black: #000;
+@color-white: #fff;
+@color-blue: #00b1de;
+@color-gray-666: #666;
+@color-gray-ccc: #ccc;
+@color-blue-dark: #007491;
+@color-gray-e0: #e0e0e0;
+@color-red: #ff0000;
+@color-bg: #f1f1f7;
+
+
+@img-content: "../img/content";
+@img-layout: "../img/layout";
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,800,700);
+
+.defaultFont {
+  font-family: 'Open Sans', Arial, Helvetica,sans-serif;
+}
+.ArialFont {
+  font-family: Arial, Helvetica,sans-serif;
+}
+
+.scale(@value:1.05){
+  transform: scale(@value, @value);
+}
+
+.transition(@time : 0.3s, @type : all){
+  transition: @type @time ease-in;
+}
+
+// @radius -> 10px | 50% | 10px 0 | 10px 0 10px 0
+.border-radius(@radius: 0) {
+  border-radius: @radius;
+}
+
+// .font-px-to-em(15)
+// .font-px-to-em(15px)
+// .font-px-to-em(15px, 14px)
+// .font-px-to-em(15, 14px)
+// .font-px-to-em(15px, 14)
+.font-px-to-em(@size: 14, @base: 14) {
+  font-size: unit(@size / @base, em);
+}

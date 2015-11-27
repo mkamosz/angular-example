@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="appAngularExample">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>App angular example</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/main.min.css">
+</head>
+<body ng-controller="IndexController">
+    <div class="page">
+        <section class="content">
+            <div ng-view=""></div>
+        </section>
+
+        <footer class="footer">
+            <p>&copy 2015 All Right Reserved <a href="mailto:mkamosz@gmail.com">Michał Kamosz</a></p>
+        </footer>
+    </div>
+    <script src="assets/js/libs/angular.js"></script>
+    <script src="assets/js/libs/angular-route.js"></script>
+
+    <script src="app.mdl.js"></script>
+    <script src="app.rout.js"></script>
+
+    <script src="core/homepage/homepage-ctrl.js"></script>
+
+    <script src="index-ctrl.js"></script>
+    <script src="core/error/error-ctrl.js"></script>
+</body>
+</html>
