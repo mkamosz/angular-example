@@ -1,7 +1,6 @@
 @import "config";
 
 html, body{
-  height:100%;
   margin:0;
   padding:0;
 }
@@ -9,6 +8,7 @@ html, body{
 body{
   .defaultFont;
   background: @color-white;
+  padding:0 0 60px 0;
 }
 
 ul,ol{
@@ -23,5 +23,26 @@ a{
   &:hover{
     color:@color-blue;
     text-decoration: none;
+  }
+}
+
+.form-control{
+  padding:5px;
+  max-width:110px;
+}
+
+table{
+  tr{
+    td{
+      &:nth-child(3),&:nth-child(4),&:nth-child(5){
+        width:120px;
+      }
+      &.wide{
+        .form-control{
+          max-width:100%;
+          margin-bottom:5px;
+        }
+      }
+    }
   }
 }

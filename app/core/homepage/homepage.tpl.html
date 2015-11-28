@@ -14,23 +14,62 @@
                                 <th>mobile number</th>
                                 <th>address (city + street + house number)</th>
                                 <th>
-                                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit selected</button>
+                                    <button type="button" ng-if="hp.selectedCheck.length > 0"  class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Save selected</button>
+                                    <button type="button" ng-if="hp.selectedCheck.length == 0" ng-click="hp.fn.editSelected()" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit selected</button>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><input type="checkbox" name="field1" /></td>
-                                <td>0</td>
-                                <td>name1</td>
-                                <td>surname1</td>
-                                <td>26-01-1981</td>
-                                <td>123123123</td>
-                                <td>Poznań, ul. Długa 11</td>
+                            <tr ng-repeat="item in hp.data.users">
+                                <td><input type="checkbox" ng-change="hp.fn.changeSelected(item,$index);" ng-checked="hp.editable[$index]" ng-model="hp.check[$index]" ng-init="hp.check[$index] = false"  name="check_{{item.id}}"/></td>
                                 <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit</button>
-                                        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                                    <p>{{item.id}}</p>
+                                    <div class="form-group" ng-if="hp.editable[$index]">
+                                        <input type="hidden" name="id_{{item.id}}" class="form-control" value="{{item.id}}"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p ng-if="!hp.editable[$index]">{{item.name}}</p>
+                                    <div class="form-group" ng-if="hp.editable[$index]">
+                                        <input type="text" class="form-control" ng-model="item.name" name="name_{{item.id}}" value="{{item.name}}"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p ng-if="!hp.editable[$index]">{{item.surname}}</p>
+                                    <div class="form-group" ng-if="hp.editable[$index]">
+                                        <input type="text" class="form-control" ng-model="item.surname" name="surname_{{item.id}}" value="{{item.surname}}"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p ng-if="!hp.editable[$index]">{{item.birth}}</p>
+                                    <div class="form-group" ng-if="hp.editable[$index]">
+                                        <input type="text" class="form-control" ng-model="item.birth" name="birth_{{item.id}}" value="{{item.birth}}"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p ng-if="!hp.editable[$index]">{{item.phone}}</p>
+                                    <div class="form-group" ng-if="hp.editable[$index]">
+                                        <input type="text" class="form-control" ng-model="item.phone" name="phone_{{item.id}}" value="{{item.phone}}"/>
+                                    </div>
+                                </td>
+                                <td class="wide">
+                                    <p ng-if="!hp.editable[$index]">{{item.city}}, {{item.street}} {{item.number}}</p>
+                                    <div class="form-group" ng-if="hp.editable[$index]">
+                                        <input type="text" class="form-control" ng-model="item.city" name="city_{{item.id}}" value="{{item.city}}"/>
+                                        <input type="text" class="form-control" ng-model="item.street" name="street_{{item.id}}" value="{{item.street}}"/>
+                                        <input type="text" class="form-control"  ng-model="item.number" name="number_{{item.id}}" value="{{item.number}}"/>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="btn-group" ng-if="!hp.editable[$index]">
+                                        <button type="button" ng-click="hp.fn.editUser(item,$index)" class="btn btn-primary" ng-model="hp.editable[$index]" ng-init="hp.editable[$index] = false" ><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                                        <button type="button" ng-click="hp.fn.deleteUser(item)" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                                    </div>
+
+                                    <div class="btn-group" ng-if="hp.editable[$index]">
+                                        <button type="button" ng-click="hp.fn.saveUser(item,$index)" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Save</button>
+                                        <button type="button" ng-click="hp.fn.cancelEdit(item,$index)" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
                                     </div>
                                 </td>
                             </tr>
