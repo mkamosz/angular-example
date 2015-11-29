@@ -5,6 +5,7 @@ var gulp = require('gulp'),
     LessPluginAutoPrefix = require('less-plugin-autoprefix'),
     autoprefixPlugin = new LessPluginAutoPrefix({browsers: ["last 2 versions"]});
     rename = require("gulp-rename");
+    server = require('karma').Server;
 
 /*
 *    Autoprefix - list
@@ -25,9 +26,16 @@ gulp.task('less', function() {
 
 gulp.task('js', function() {});
 
+gulp.task('tests', function (done) {
+    return new server({
+        configFile: require('path').resolve('karma.conf.js'),
+        singleRun: true
+    }, done).start();
+});
+
 gulp.task('watch', function() {
     gulp.watch(['./app/assets/less/**/*.less'], ['less']);
     gulp.watch(['./app/common/**/*.html']);
 });
 
-gulp.task('default', ['less','watch']);
+gulp.task('default', ['less','tests','watch']);
