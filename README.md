@@ -1,7 +1,7 @@
 # Angular example
 
-Simple angular application for get data / show / edit / delete
-Now there are mock url's.
+Simple angular application for get data / show / edit / delete<br>
+Now thera are mock url's.<br>
 To set for testing please change in app.mdl.js file `mockData` for false
 
 
@@ -20,4 +20,6 @@ To set for testing please change in app.mdl.js file `mockData` for false
   and two more files `app.mdl.js` and `app.rout.js`
 
 ## TODO
-tests for controller HomePageController
+* tests for controller HomePageController
+* validation for editable fields
+* datepicker for birth field
