@@ -2,7 +2,7 @@
  * Created by kamoszm on 2015-11-27.
  */
 
-app.controller('HomePageController', ['$scope','conn', 'path', 'commFun', function($scope, conn, path, commFun){
+app.controller('HomePageController', ['$scope','conn', 'path', 'commFun','myConfig', function($scope, conn, path, commFun, myConfig){
     /* Private variables for this controller - $scope*/
 
     var orginalUsers = [];
@@ -37,9 +37,10 @@ app.controller('HomePageController', ['$scope','conn', 'path', 'commFun', functi
 
     // delete user
     $scope.hp.fn.deleteUser = function(item){
-        var check = confirm("Are you sure you want to delete item?");
+        var check = confirm("Are you sure you want to delete item?"),
+            url = $scope.path.server.remove + (myConfig.mockData ? "" : item.id);
         if (check == true) {
-            conn.postData($scope.path.server.remove, item)
+            conn.postData(url, item)
                 .then(function(result){
                     var idx = commFun.findItemIdxById($scope.hp.data.users,item.id);
 
@@ -71,7 +72,8 @@ app.controller('HomePageController', ['$scope','conn', 'path', 'commFun', functi
 
     // save user
     $scope.hp.fn.saveUser = function(item,index){
-        conn.postData($scope.path.server.edit, item )
+        var url = $scope.path.server.edit + (myConfig.mockData ? "" : item.id);
+        conn.postData(url, item )
             .then(function(result){
                 $scope.hp.editable[index] = false;
                 $scope.hp.fn.changeSelected(item,index);
