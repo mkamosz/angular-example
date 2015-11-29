@@ -1,7 +1,7 @@
 # Angular example
 
 Simple angular application for get data / show / edit / delete
-Now thera are mock url's.
+Now there are mock url's.
 To set for testing please change in app.mdl.js file `mockData` for false
 
 
