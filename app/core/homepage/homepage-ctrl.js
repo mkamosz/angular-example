@@ -134,4 +134,5 @@ app.controller('HomePageController', ['$scope','conn', 'path', 'commFun','myConf
 
     // init
     $scope.hp.fn.getUsers();
+
 }]);

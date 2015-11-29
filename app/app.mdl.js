@@ -4,7 +4,7 @@
 
 var app = angular.module('appAngularExample',['ngRoute'])
     .constant('myConfig', {
-        'mockData': false
+        'mockData': true
     });
 
 
