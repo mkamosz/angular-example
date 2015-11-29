@@ -74,6 +74,7 @@ app.controller('HomePageController', ['$scope','conn', 'path', 'commFun', functi
         conn.postData($scope.path.server.edit, item )
             .then(function(result){
                 $scope.hp.editable[index] = false;
+                $scope.hp.fn.changeSelected(item,index);
             }, function(msg){
                 console.log(msg);
             });
@@ -84,16 +85,37 @@ app.controller('HomePageController', ['$scope','conn', 'path', 'commFun', functi
         var idx = commFun.findItemIdxById($scope.hp.data.users,item.id);
 
         $scope.hp.editable[index] = false;
+        $scope.hp.fn.changeSelected(item,index);
         $scope.hp.data.users[idx] = angular.copy(orginalUsers[idx]);
     };
 
     // edit selected
     $scope.hp.fn.editSelected = function(){
         var i = 0,
-            arrLength = $scope.hp.selectedCheck.length;
-        for(i; i < arrLength; i=i+1){
-            var idx = commFun.findItemIdxById($scope.hp.data.users,$scope.hp.selectedCheck[i].id);
-            $scope.hp.editable[idx] = true;
+            aLength = $scope.hp.selectedCheck.length,
+            ids = [];
+
+        for(i; i < aLength; i=i+1){
+            ids.push($scope.hp.selectedCheck[i].id);
+        }
+
+        if(ids){
+            conn.getData($scope.path.server.findall, {params : {"ids[]": ids }})
+                .then(function(result){
+                    var j = 0,
+                        rLength = result.length,
+                        idx;
+                    if(result.length){
+                        for(j; j < rLength; j=j+1){
+                            idx = commFun.findItemIdxById($scope.hp.data.users,result[j].id);
+                            $scope.hp.data.users[idx] = angular.copy(result[j]);
+                            orginalUsers[idx] = angular.copy(result[j]);
+                            $scope.hp.editable[idx] = true;
+                        }
+                    }
+                }, function(msg){
+                    console.log(msg);
+                });
         }
     };
 
