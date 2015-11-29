@@ -14,7 +14,7 @@
                                 <th>mobile number</th>
                                 <th>address (city + street + house number)</th>
                                 <th>
-                                    <button type="button" ng-click="hp.fn.editSelected()" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit selected</button>
+                                    <button type="button" ng-click="hp.fn.editSelected()" ng-disabled="hp.selectedCheck.length == 0" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit selected</button>
                                 </th>
                             </tr>
                         </thead>

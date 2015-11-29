@@ -87,7 +87,7 @@ app.controller('HomePageController', ['$scope','conn', 'path', 'commFun','myConf
         var idx = commFun.findItemIdxById($scope.hp.data.users,item.id);
 
         $scope.hp.editable[index] = false;
-        $scope.hp.fn.changeSelected(item,index);
+        $scope.hp.fn.changeSelected(item,idx);
         $scope.hp.data.users[idx] = angular.copy(orginalUsers[idx]);
     };
 
@@ -101,7 +101,7 @@ app.controller('HomePageController', ['$scope','conn', 'path', 'commFun','myConf
             ids.push($scope.hp.selectedCheck[i].id);
         }
 
-        if(ids){
+        if(ids.length){
             conn.getData($scope.path.server.findall, {params : {"ids[]": ids }})
                 .then(function(result){
                     var j = 0,
@@ -123,10 +123,12 @@ app.controller('HomePageController', ['$scope','conn', 'path', 'commFun','myConf
 
     //change selected
     $scope.hp.fn.changeSelected = function(item,index){
+        var idx = commFun.findItemIdxById($scope.hp.selectedCheck,item.id);
+
         if($scope.hp.check[index]){
-            $scope.hp.selectedCheck[index] = item;
+            $scope.hp.selectedCheck.push(item);
         } else {
-            commFun.removeItemFromArray($scope.hp.selectedCheck, index);
+            commFun.removeItemFromArray($scope.hp.selectedCheck, idx);
         }
     };
 
